@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Blink Dark",
+  "version": "1.0.0",
+  "description": "Paints blank pages dark while they load to avoid the white flash.",
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "css": ["prepaint.css"],
+      "js": ["done.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ]
+}
