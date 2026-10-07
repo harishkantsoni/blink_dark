@@ -8,17 +8,17 @@
     root.setAttribute("data-prepaint-done", "");
   };
 
-  const afterPaint = () => {
+  // Lift the cover only after the page has fully loaded and painted a couple of frames.
+  const afterLoad = () => {
     requestAnimationFrame(() => requestAnimationFrame(finish));
   };
 
-  // Wait for "load" so render-blocking stylesheets have been applied before the override lifts.
-  if (document.readyState !== "complete") {
-    window.addEventListener("load", afterPaint, { once: true });
+  if (document.readyState === "complete") {
+    afterLoad();
   } else {
-    afterPaint();
+    window.addEventListener("load", afterLoad, { once: true });
   }
 
-  // Safety net: rAF doesn't fire in background tabs, and slow pages may never reach DOMContentLoaded.
-  setTimeout(finish, 3000);
+  // Safety net so a page that never finishes loading (or a background tab where rAF doesn't fire) isn't covered forever.
+  setTimeout(finish, 10000);
 })();

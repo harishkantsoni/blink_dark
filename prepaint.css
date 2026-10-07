@@ -1,5 +1,8 @@
+/* Recolor backgrounds only (not images, text or icons) until the page has loaded. */
 html:not([data-prepaint-done]),
-html:not([data-prepaint-done]) > body {
-  background: #111 !important;
-  color-scheme: dark;
+html:not([data-prepaint-done]) body,
+html:not([data-prepaint-done]) body *,
+html:not([data-prepaint-done]) body *::before,
+html:not([data-prepaint-done]) body *::after {
+  background-color: #d3d3d3 !important;
 }
