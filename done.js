@@ -12,8 +12,9 @@
     requestAnimationFrame(() => requestAnimationFrame(finish));
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", afterPaint, { once: true });
+  // Wait for "load" so render-blocking stylesheets have been applied before the override lifts.
+  if (document.readyState !== "complete") {
+    window.addEventListener("load", afterPaint, { once: true });
   } else {
     afterPaint();
   }

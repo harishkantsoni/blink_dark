@@ -1,4 +1,5 @@
-html:not([data-prepaint-done]) {
+html:not([data-prepaint-done]),
+html:not([data-prepaint-done]) > body {
   background: #111 !important;
   color-scheme: dark;
 }
